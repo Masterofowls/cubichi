@@ -1,0 +1,3 @@
+# ads.txt - Authorized Digital Sellers
+# cubichi.ru does not participate in programmatic advertising
+placeholder.example.com, placeholder, DIRECT, placeholder

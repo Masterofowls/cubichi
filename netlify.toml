@@ -1,17 +1,33 @@
 redirectsOrigin = "config"
 headersOrigin = "config"
 plugins = []
-headers = []
+
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 
 [functions]
 
   [functions."*"]
 
 [build]
-publish = "C:\\Users\\mrdan\\Downloads\\deploy-67f8f0aca8011104c2b7d6a7"
+publish = "out"
 publishOrigin = "config"
 commandOrigin = "config"
-command = "echo 'Static files already built'"
+command = "npm run build"
 
   [build.environment]
 
