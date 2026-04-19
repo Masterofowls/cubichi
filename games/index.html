@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Игры - Кубики-Самоучки</title>
+    <meta name="description" content="Образовательные игры для изучения русского языка">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-white antialiased flex flex-col">
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a class="flex items-center gap-3" href="/">
+                        <span class="text-3xl">🎲</span>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-sky-600 to-emerald-600 bg-clip-text text-transparent">Кубики-Самоучки</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a class="text-gray-600 hover:text-sky-600 transition-colors" href="/rules/">Правила</a>
+                    <a class="text-sky-600 font-medium" href="/games/">Игры</a>
+                    <a class="text-gray-600 hover:text-sky-600 transition-colors" href="/for-parents/">Родителям</a>
+                    <a class="text-gray-600 hover:text-sky-600 transition-colors" href="/methodology/">Методика</a>
+                    <a class="text-gray-600 hover:text-sky-600 transition-colors" href="/#contact">Контакты</a>
+                    <a href="https://t.me/cubichivsem" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 text-white hover:bg-sky-700 transition-colors">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.015-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.48.33-.913.49-1.302.48-.428-.009-1.252-.241-1.865-.44-.756-.244-1.358-.374-1.307-.789.027-.216.324-.437.892-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.398-.006.922.155 1.059.452.089.189.132.394.13.615l.001.005z"></path>
+                        </svg>
+                        Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16 flex-grow">
+        <div class="container mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Образовательные игры</h1>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Выберите игру для изучения русского языка. Каждая игра разработана для эффективного обучения в игровой форме.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Алфавит -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">🔤</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Алфавит</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Изучаем буквы русского алфавита в игровой форме</p>
+                        <a href="/games/alphabet/" class="inline-flex items-center px-4 py-2 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Части речи -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-cyan-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">📝</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Части речи</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Учимся различать существительные, прилагательные, глаголы</p>
+                        <a href="/games/parts-of-speech/" class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Корневые гласные -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-emerald-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">🌱</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Корневые гласные</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Изучаем безударные гласные в корне слова</p>
+                        <a href="/games/root-vowels/" class="inline-flex items-center px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Падежи -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-orange-400 to-red-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">📐</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Падежи</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Осваиваем падежи русского языка</p>
+                        <a href="/games/cases/" class="inline-flex items-center px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Слова -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-indigo-400 to-purple-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">💭</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Слова</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Расширяем словарный запас и изучаем значения слов</p>
+                        <a href="/games/words/" class="inline-flex items-center px-4 py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Слоги -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-teal-400 to-blue-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">🔗</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Слоги</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Изучаем деление слов на слоги</p>
+                        <a href="/games/syllables/" class="inline-flex items-center px-4 py-2 rounded-lg bg-teal-500 text-white hover:bg-teal-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Предложения -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-32 bg-gradient-to-br from-rose-400 to-pink-400"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-3">📖</div>
+                            <h3 class="text-xl font-semibold text-gray-900">Предложения</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Учимся составлять и анализировать предложения</p>
+                        <a href="/games/sentences/" class="inline-flex items-center px-4 py-2 rounded-lg bg-rose-500 text-white hover:bg-rose-600 transition-colors">
+                            Играть
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Следите за новыми играми</h2>
+                <p class="text-lg text-slate-600 mb-8">Подписывайтесь на наш Telegram-канал, чтобы не пропустить новые игры и обновления</p>
+                <a href="https://t.me/cubichivsem" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-700 transition-colors gap-2">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.015-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.48.33-.913.49-1.302.48-.428-.009-1.252-.241-1.865-.44-.756-.244-1.358-.374-1.307-.789.027-.216.324-.437.892-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.398-.006.922.155 1.059.452.089.189.132.394.13.615l.001.005z"></path>
+                    </svg>
+                    Подписаться на канал
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 py-12">
+            <nav class="flex flex-wrap justify-center gap-6 md:gap-12">
+                <a class="text-sm text-gray-600 hover:text-sky-600 transition-colors" href="/rules/">Правила</a>
+                <a class="text-sm text-sky-600 font-medium" href="/games/">Игры</a>
+                <a class="text-sm text-gray-600 hover:text-sky-600 transition-colors" href="/for-parents/">Родителям</a>
+                <a class="text-sm text-gray-600 hover:text-sky-600 transition-colors" href="/methodology/">Методика</a>
+                <a class="text-sm text-gray-600 hover:text-sky-600 transition-colors" href="/#contact">Контакты</a>
+            </nav>
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-2 text-sm text-gray-500">
+                    <span class="text-lg">🎲</span>
+                    <p>© 2025 Кубики-Самоучки. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
