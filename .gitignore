@@ -26,3 +26,6 @@ npm-debug.log*
 # memory bank
 memory-bank/
 .copilot/
+
+# Local Netlify folder
+.netlify
