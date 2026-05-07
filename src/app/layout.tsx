@@ -8,11 +8,11 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Кубики-Самоучки — Тренажер по русскому языку",
+    default: "Кубики-Самоучки — Игры-тренажеры русского языка",
     template: "%s | Кубики-Самоучки",
   },
   description:
-    "Логопедический тренажер для детей 7–12 лет. Настольные игры с кубиками для изучения частей речи, падежей и безударных гласных. Разработано логопедом-дефектологом.",
+    "Настольные игры с кубиками для детей 7–12 лет: части речи, падежи, безударные гласные. Разработано логопедом-дефектологом.",
   keywords: [
     "кубики-самоучки",
     "тренажер русский язык",
@@ -95,6 +95,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={inter.className}>
+      <head>
+        {/* Yandex Metrika */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(99999999,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+`,
+          }}
+        />
+        <noscript>
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://mc.yandex.ru/watch/99999999"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+      </head>
       <body className="min-h-screen bg-white antialiased flex flex-col">
         <Navigation />
         <main className="pt-16 flex-grow">{children}</main>

@@ -4,26 +4,42 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx tsx --tsconfig tsconfig.admin.json scripts/generate-rss.ts && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "admin": "npx tsx --tsconfig tsconfig.admin.json admin/server.ts",
+    "generate-rss": "npx tsx --tsconfig tsconfig.admin.json scripts/generate-rss.ts",
+    "export-posts": "tsx scripts/export-posts.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
+    "motion": "^12.38.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@adminjs/bundler": "^3.0.0",
+    "@adminjs/express": "^6.1.1",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "adminjs": "^7.8.17",
     "autoprefixer": "^10.4.20",
+    "express": "^5.2.1",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.19.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",
+    "tsx": "^4.21.0",
     "typescript": "^5.7.2"
   }
 }

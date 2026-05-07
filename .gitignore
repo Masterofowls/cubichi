@@ -29,3 +29,8 @@ memory-bank/
 
 # Local Netlify folder
 .netlify
+
+.vercel
+/node_modules
+/.playwright-mcp
+/.netlify
