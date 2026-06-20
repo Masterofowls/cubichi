@@ -1,17 +1,28 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { ArrowLeft, Calendar, Tag, Rss } from 'lucide-react';
-import { ImageCarousel } from '@/components/image-carousel';
-import { MarkdownContent } from '@/components/markdown-content';
-import { getPublishedPosts, getPostBySlug, formatDate, CATEGORY_LABELS, BADGE_COLOR_CLASSES } from '@/lib/posts';
+import { ArrowLeft, Calendar, Rss, Tag } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
+import { ImageCarousel } from "@/components/image-carousel";
+import { MarkdownContent } from "@/components/markdown-content";
+import {
+  BADGE_COLOR_CLASSES,
+  CATEGORY_LABELS,
+  formatDate,
+  getPostBySlug,
+  getPublishedPosts,
+} from "@/lib/posts";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = getPublishedPosts();
+  if (posts.length === 0) {
+    return [{ slug: "stub" }];
+  }
   return posts.map((p) => ({ slug: p.slug }));
 }
 
@@ -20,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  const ogImage = post.images?.[0] ?? '/images/og-preview.jpg';
+  const ogImage = post.images?.[0] ?? "/images/og-preview.jpg";
 
   return {
     title: post.title,
@@ -29,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
-      type: 'article',
+      type: "article",
       publishedTime: post.publishedAt,
     },
     alternates: {
@@ -40,6 +51,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
+  if (slug === "stub") {
+    redirect("/#news");
+  }
   const post = getPostBySlug(slug);
 
   if (!post) notFound();
@@ -67,7 +81,8 @@ export default async function PostPage({ params }: Props) {
             {post.badge && (
               <span
                 className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${
-                  BADGE_COLOR_CLASSES[post.badgeColor] ?? BADGE_COLOR_CLASSES.blue
+                  BADGE_COLOR_CLASSES[post.badgeColor] ??
+                  BADGE_COLOR_CLASSES.blue
                 }`}
               >
                 {post.badge}
@@ -86,7 +101,9 @@ export default async function PostPage({ params }: Props) {
           </h1>
 
           {post.excerpt && (
-            <p className="text-lg text-gray-500 leading-relaxed">{post.excerpt}</p>
+            <p className="text-lg text-gray-500 leading-relaxed">
+              {post.excerpt}
+            </p>
           )}
         </header>
 
@@ -102,8 +119,8 @@ export default async function PostPage({ params }: Props) {
           <div className="mb-8 rounded-2xl overflow-hidden aspect-video shadow-lg">
             <iframe
               src={post.videoUrl
-                .replace('watch?v=', 'embed/')
-                .replace('youtu.be/', 'www.youtube.com/embed/')}
+                .replace("watch?v=", "embed/")
+                .replace("youtu.be/", "www.youtube.com/embed/")}
               title={post.title}
               className="w-full h-full"
               allowFullScreen

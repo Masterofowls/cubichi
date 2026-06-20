@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "npx tsx --tsconfig tsconfig.admin.json scripts/generate-rss.ts && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome lint .",
+    "lint:biome": "biome lint .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "check:biome": "biome check .",
+    "check:biome:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run check:biome && npm run typecheck",
+    "check:qlty": "qlty check -a",
     "admin": "npx tsx --tsconfig tsconfig.admin.json admin/server.ts",
     "generate-rss": "npx tsx --tsconfig tsconfig.admin.json scripts/generate-rss.ts",
     "export-posts": "tsx scripts/export-posts.ts"
@@ -27,6 +35,7 @@
   "devDependencies": {
     "@adminjs/bundler": "^3.0.0",
     "@adminjs/express": "^6.1.1",
+    "@biomejs/biome": "^2.5.0",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/node": "^22.10.0",
@@ -37,9 +46,19 @@
     "express": "^5.2.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.19.0",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.10",
     "tailwindcss": "^3.4.16",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "@tiptap/extension-link": ">=2.10.4",
+    "esbuild": ">=0.28.1",
+    "i18next-http-backend": ">=3.0.5",
+    "next": {
+      "postcss": "8.5.10"
+    },
+    "tinymce": ">=7.9.3",
+    "uuid": ">=11.1.1"
   }
 }

@@ -113,7 +113,7 @@ export default function MethodologyPage() {
             <div className="space-y-4">
               {principles.map((principle, i) => (
                 <div
-                  key={i}
+                  key={principle}
                   className="flex gap-4 items-start p-5 rounded-xl bg-white shadow-sm"
                 >
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-sky-100 text-sky-600 text-sm font-semibold flex items-center justify-center">
@@ -135,9 +135,9 @@ export default function MethodologyPage() {
               Результаты занятий
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {results.map((result, i) => (
+              {results.map((result) => (
                 <div
-                  key={i}
+                  key={result}
                   className="flex items-center gap-3 p-4 rounded-lg bg-emerald-50"
                 >
                   <span className="text-emerald-500 text-lg">✓</span>

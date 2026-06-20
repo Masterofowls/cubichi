@@ -1,11 +1,10 @@
-import AdminJS from "adminjs";
+import { randomUUID } from "node:crypto";
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import AdminJSExpress from "@adminjs/express";
+import AdminJS from "adminjs";
 import express from "express";
-import session from "express-session";
-import { readFileSync, writeFileSync } from "fs";
-import { resolve } from "path";
-import { randomUUID } from "crypto";
-import type { Post, PostCategory, BadgeColor } from "../src/types/post.js";
+import type { BadgeColor, Post, PostCategory } from "../src/types/post.js";
 
 // ─── File-based data store ───────────────────────────────────────────────────
 const DATA_FILE = resolve(process.cwd(), "data", "posts.json");

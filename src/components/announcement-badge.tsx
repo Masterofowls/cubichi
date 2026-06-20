@@ -1,12 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { Calendar, Clock, MapPin, X } from "lucide-react";
 import Image from "next/image";
-import { X, MapPin, Calendar, Clock } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export function AnnouncementBadge() {
   const [dismissed, setDismissed] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const mapDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = mapDialogRef.current;
+    if (!dialog) return;
+
+    if (showMap) {
+      if (!dialog.open) dialog.showModal();
+      return;
+    }
+
+    if (dialog.open) dialog.close();
+  }, [showMap]);
 
   if (dismissed) return null;
 
@@ -34,6 +47,7 @@ export function AnnouncementBadge() {
                 учебного материала&raquo;
               </p>
               <button
+                type="button"
                 onClick={() => setShowMap(true)}
                 className="inline-flex items-center gap-1 mt-1 text-sm text-amber-700 hover:text-amber-900 underline underline-offset-2 transition-colors"
               >
@@ -42,6 +56,7 @@ export function AnnouncementBadge() {
               </button>
             </div>
             <button
+              type="button"
               onClick={() => setDismissed(true)}
               className="flex-shrink-0 p-1 rounded-lg text-amber-600 hover:text-amber-800 hover:bg-amber-100 transition-colors"
               aria-label="Закрыть объявление"
@@ -52,64 +67,59 @@ export function AnnouncementBadge() {
         </div>
       </div>
 
-      {showMap && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4"
-          onClick={() => setShowMap(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Карта проезда к месту семинара"
-        >
-          <div
-            className="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 sm:p-6 border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Как добраться
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Кирочная ул. д.23, Санкт-Петербург
-                  </p>
-                </div>
-                <button
-                  onClick={() => setShowMap(false)}
-                  className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-                  aria-label="Закрыть карту"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+      <dialog
+        ref={mapDialogRef}
+        className="fixed inset-0 z-[60] m-0 max-h-none max-w-none w-full h-full border-0 bg-transparent p-4 backdrop:bg-black/60 open:flex open:items-center open:justify-center"
+        onClose={() => setShowMap(false)}
+        aria-label="Карта проезда к месту семинара"
+      >
+        <div className="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+          <div className="p-4 sm:p-6 border-b border-gray-100">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Как добраться
+                </h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Кирочная ул. д.23, Санкт-Петербург
+                </p>
               </div>
+              <button
+                type="button"
+                onClick={() => setShowMap(false)}
+                className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                aria-label="Закрыть карту"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
-            <div className="relative">
-              <Image
-                src="/images/seminar-map.jpg"
-                alt="Карта проезда: от станции метро до Кирочная ул. д.23"
-                width={800}
-                height={600}
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="p-4 sm:p-6 bg-amber-50">
-              <div className="flex flex-wrap gap-4 text-sm text-amber-900">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
-                  26 апреля 2025
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4" />с 11:00 до 13:00
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4" />
-                  Кирочная ул. д.23
-                </span>
-              </div>
+          </div>
+          <div className="relative">
+            <Image
+              src="/images/seminar-map.jpg"
+              alt="Карта проезда: от станции метро до Кирочная ул. д.23"
+              width={800}
+              height={600}
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="p-4 sm:p-6 bg-amber-50">
+            <div className="flex flex-wrap gap-4 text-sm text-amber-900">
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4" />
+                26 апреля 2025
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4" />с 11:00 до 13:00
+              </span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4" />
+                Кирочная ул. д.23
+              </span>
             </div>
           </div>
         </div>
-      )}
+      </dialog>
     </>
   );
 }

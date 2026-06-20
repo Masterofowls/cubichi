@@ -1,10 +1,21 @@
+import { MotionConfig } from "motion/react";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import { Navigation } from "@/components/navigation";
+import { Nunito, Rubik } from "next/font/google";
 import { Footer } from "@/components/footer";
+import { Navigation } from "@/components/navigation";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const rubik = Rubik({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const nunito = Nunito({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -86,6 +97,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: "#0284c7",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -94,10 +106,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={inter.className}>
+    <html
+      lang="ru"
+      className={`${rubik.variable} ${nunito.variable} font-sans`}
+    >
       <head>
         {/* Yandex Metrika */}
         <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: third-party analytics bootstrap
           dangerouslySetInnerHTML={{
             __html: `
 (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -111,7 +127,6 @@ ym(99999999,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvi
         />
         <noscript>
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://mc.yandex.ru/watch/99999999"
               style={{ position: "absolute", left: "-9999px" }}
@@ -121,9 +136,22 @@ ym(99999999,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvi
         </noscript>
       </head>
       <body className="min-h-screen bg-white antialiased flex flex-col">
-        <Navigation />
-        <main className="pt-16 flex-grow">{children}</main>
-        <Footer />
+        <MotionConfig reducedMotion="user">
+          <a href="#content" className="skip-link visually-hidden">
+            Перейти к содержимому
+          </a>
+          <header className="w-full">
+            <Navigation />
+          </header>
+          <main
+            id="content"
+            tabIndex={-1}
+            className="pt-16 flex-grow outline-none"
+          >
+            {children}
+          </main>
+          <Footer />
+        </MotionConfig>
       </body>
     </html>
   );

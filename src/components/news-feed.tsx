@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import Link from "next/link";
 import { Rss, SlidersHorizontal } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { PostCard } from "./post-card";
-import type { Post } from "@/types/post";
+import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import { CATEGORY_LABELS } from "@/lib/posts";
+import type { Post } from "@/types/post";
+import { PostCard } from "./post-card";
 
 interface NewsFeedProps {
   posts: Post[];
@@ -36,7 +36,7 @@ export function NewsFeed({ posts }: NewsFeedProps) {
   return (
     <section
       id="news"
-      className="py-16 lg:py-24 bg-gradient-to-b from-white to-sky-50/30"
+      className="below-fold-section py-16 lg:py-24 bg-gradient-to-b from-white to-sky-50/30 scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -73,6 +73,7 @@ export function NewsFeed({ posts }: NewsFeedProps) {
           <div className="flex flex-wrap items-center gap-2 mb-8">
             <SlidersHorizontal className="w-4 h-4 text-gray-400" />
             <button
+              type="button"
               onClick={() => setActiveCategory(ALL)}
               className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all ${
                 activeCategory === ALL
@@ -84,6 +85,7 @@ export function NewsFeed({ posts }: NewsFeedProps) {
             </button>
             {categories.map((cat) => (
               <button
+                type="button"
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all ${

@@ -7,12 +7,12 @@
  * (Settings → News → RSS import → "Publish as article").
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = resolve(__dirname, "..");
 
 interface Post {
   id: string;
@@ -30,11 +30,11 @@ interface Post {
 
 function escapeXml(text: string): string {
   return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 /**
@@ -45,33 +45,36 @@ function markdownToHtml(md: string): string {
   return (
     md
       // Code blocks
-      .replace(/```[\s\S]*?```/g, (m) => `<pre>${escapeXml(m.slice(3, -3).trim())}</pre>`)
+      .replace(
+        /```[\s\S]*?```/g,
+        (m) => `<pre>${escapeXml(m.slice(3, -3).trim())}</pre>`,
+      )
       // Headings
       .replace(/^#{1,6}\s+(.+)$/gm, (_, t, offset, str) => {
         const level = str.slice(0, offset).match(/^#{1,6}/)?.[0]?.length ?? 1;
         return `<h${level}>${t}</h${level}>`;
       })
       // Bold
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       // Italic
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/\*(.+?)\*/g, "<em>$1</em>")
       // Inline code
-      .replace(/`(.+?)`/g, '<code>$1</code>')
+      .replace(/`(.+?)`/g, "<code>$1</code>")
       // Blockquote
-      .replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/^>\s+(.+)$/gm, "<blockquote>$1</blockquote>")
       // Unordered list items
-      .replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/^[-*]\s+(.+)$/gm, "<li>$1</li>")
       // Horizontal rule
-      .replace(/^---+$/gm, '<hr/>')
+      .replace(/^---+$/gm, "<hr/>")
       // Paragraphs — wrap lines that are not HTML tags
-      .split('\n')
+      .split("\n")
       .map((line) => {
         const trimmed = line.trim();
-        if (!trimmed) return '';
+        if (!trimmed) return "";
         if (/^<[a-zA-Z]/.test(trimmed)) return trimmed;
         return `<p>${trimmed}</p>`;
       })
-      .join('\n')
+      .join("\n")
   );
 }
 
@@ -94,14 +97,14 @@ function buildRss(posts: Post[], baseUrl: string): string {
       const imageHtml =
         post.images?.length > 0
           ? `<img src="${baseUrl}${post.images[0]}" alt="${escapeXml(post.title)}" style="max-width:100%;height:auto;"/><br/>`
-          : '';
+          : "";
       const fullHtml = imageHtml + htmlContent;
 
       // media:content for VK rich preview
       const mediaTag =
         post.images?.length > 0
           ? `<media:content url="${baseUrl}${post.images[0]}" medium="image" />`
-          : '';
+          : "";
 
       return `    <item>
       <title>${escapeXml(post.title)}</title>
@@ -113,7 +116,7 @@ function buildRss(posts: Post[], baseUrl: string): string {
       ${mediaTag}
     </item>`;
     })
-    .join('\n');
+    .join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
@@ -142,21 +145,23 @@ ${items}
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const postsPath = resolve(ROOT, 'data', 'posts.json');
-const outputPath = resolve(ROOT, 'public', 'rss.xml');
+const postsPath = resolve(ROOT, "data", "posts.json");
+const outputPath = resolve(ROOT, "public", "rss.xml");
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://cubichi.ru';
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://cubichi.ru";
 
 let posts: Post[] = [];
 try {
-  posts = JSON.parse(readFileSync(postsPath, 'utf-8')) as Post[];
+  posts = JSON.parse(readFileSync(postsPath, "utf-8")) as Post[];
 } catch {
-  console.warn('⚠️  data/posts.json not found — generating empty RSS feed.');
+  console.warn("⚠️  data/posts.json not found — generating empty RSS feed.");
 }
 
 mkdirSync(dirname(outputPath), { recursive: true });
-writeFileSync(outputPath, buildRss(posts, BASE_URL), 'utf-8');
+writeFileSync(outputPath, buildRss(posts, BASE_URL), "utf-8");
 
 const publishedCount = posts.filter((p) => p.published).length;
-console.log(`✅  RSS feed generated → public/rss.xml (${publishedCount} published posts)`);
+console.log(
+  `✅  RSS feed generated → public/rss.xml (${publishedCount} published posts)`,
+);

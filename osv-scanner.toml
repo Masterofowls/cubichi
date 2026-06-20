@@ -1,0 +1,16 @@
+# Dev-only AdminJS/TinyMCE — local admin server, not shipped to production static site.
+# TinyMCE 8.6.0 is latest; no patched release for these XSS CVEs yet.
+[[IgnoredVulns]]
+id = "CVE-2026-47759"
+ignoreUntil = 2026-09-20
+reason = "TinyMCE via AdminJS (dev-only admin). Not exposed in production static export."
+
+[[IgnoredVulns]]
+id = "CVE-2026-47761"
+ignoreUntil = 2026-09-20
+reason = "TinyMCE via AdminJS (dev-only admin). Not exposed in production static export."
+
+[[IgnoredVulns]]
+id = "CVE-2026-47762"
+ignoreUntil = 2026-09-20
+reason = "TinyMCE via AdminJS (dev-only admin). Not exposed in production static export."

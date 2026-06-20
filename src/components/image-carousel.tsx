@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { useCallback, useState } from "react";
 
 interface ImageCarouselProps {
   images: string[];
@@ -97,6 +97,7 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
 
       {/* Navigation buttons */}
       <button
+        type="button"
         onClick={prev}
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         aria-label="Предыдущее фото"
@@ -104,6 +105,7 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
         <ChevronLeft className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={next}
         className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         aria-label="Следующее фото"
@@ -113,9 +115,10 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
 
       {/* Dots */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-        {images.map((_, idx) => (
+        {images.map((image, idx) => (
           <button
-            key={idx}
+            type="button"
+            key={image}
             onClick={() => setCurrent(idx)}
             className={`w-2 h-2 rounded-full transition-all duration-200 ${
               idx === current ? "bg-white scale-125" : "bg-white/50"

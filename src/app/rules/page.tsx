@@ -119,9 +119,9 @@ export default function RulesPage() {
                       Компоненты игры
                     </h3>
                     <ul className="space-y-2">
-                      {section.components.map((item, i) => (
+                      {section.components.map((item) => (
                         <li
-                          key={i}
+                          key={item}
                           className="flex items-start gap-2 text-slate-600"
                         >
                           <span className="text-sky-500 mt-1">•</span>
@@ -139,7 +139,7 @@ export default function RulesPage() {
                       <ol className="space-y-2">
                         {section.rules.map((rule, i) => (
                           <li
-                            key={i}
+                            key={rule}
                             className="flex items-start gap-3 text-slate-600"
                           >
                             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-sky-100 text-sky-600 text-sm font-semibold flex items-center justify-center">

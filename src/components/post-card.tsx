@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { Calendar, Tag } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
+import { useState } from "react";
+import { BADGE_COLOR_CLASSES, CATEGORY_LABELS, formatDate } from "@/lib/posts";
+import type { Post } from "@/types/post";
 import { ImageCarousel } from "./image-carousel";
 import { MarkdownContent } from "./markdown-content";
-import type { Post } from "@/types/post";
-import { formatDate, CATEGORY_LABELS, BADGE_COLOR_CLASSES } from "@/lib/posts";
 
 interface PostCardProps {
   post: Post;
@@ -142,6 +142,7 @@ export function PostCard({ post, featured = false }: PostCardProps) {
         <div className="mt-auto pt-2 flex items-center gap-3 border-t border-gray-50">
           {isLong && (
             <button
+              type="button"
               onClick={() => setExpanded((v) => !v)}
               className="text-sm text-sky-600 font-medium hover:text-sky-700 transition-colors duration-200"
             >

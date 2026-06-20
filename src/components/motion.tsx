@@ -1,7 +1,7 @@
 "use client";
 
-import { type ReactNode } from "react";
 import * as m from "motion/react-client";
+import type { ReactNode } from "react";
 
 interface FadeInProps {
   children: ReactNode;

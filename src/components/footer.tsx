@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Rss } from "lucide-react";
+import Link from "next/link";
 
 const footerLinks = [
   { href: "/rules/", label: "Правила" },
@@ -37,6 +37,7 @@ export function Footer() {
             rel="noopener noreferrer"
             aria-label="ВКонтакте"
           >
+            <span className="sr-only">ВКонтакте</span>
             <svg
               fill="currentColor"
               viewBox="0 0 24 24"

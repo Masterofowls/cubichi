@@ -162,7 +162,7 @@ export default function ForParentsPage() {
             <div className="space-y-6">
               {extras.map((item, i) => (
                 <div
-                  key={i}
+                  key={item.title}
                   className="flex gap-4 items-start p-6 rounded-xl bg-white shadow-lg shadow-sky-100/50"
                 >
                   <span className="flex-shrink-0 w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center">

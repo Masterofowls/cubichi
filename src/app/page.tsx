@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { AnnouncementBadge } from "@/components/announcement-badge";
-import { VideoPlayer } from "@/components/video-player";
 import {
+  AnimatedIcon,
+  CountUp,
   FadeIn,
+  HoverCard,
+  ScaleIn,
   Stagger,
   StaggerItem,
-  ScaleIn,
-  Floating,
-  CountUp,
-  HoverCard,
-  AnimatedIcon,
 } from "@/components/motion";
 import { NewsFeed } from "@/components/news-feed";
+import { VideoPlayer } from "@/components/video-player";
+import { YandexOrderForm } from "@/components/yandex-order-form";
 import { getPublishedPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
@@ -115,7 +113,7 @@ const faqItems = [
   },
   {
     q: "Как оформить заказ?",
-    a: "Заполните форму заказа на нашем сайте или напишите нам в WhatsApp по номеру +7 921 908-17-12. Мы свяжемся с вами для уточнения деталей и отправки. Доставка осуществляется по всей России.",
+    a: "Заполните форму заказа на сайте, напишите в Telegram (@gurevichlena), ВКонтакте или WhatsApp (+7 921 908-17-12). Также можно заказать через магазин ВКонтакте. Мы свяжемся с вами для уточнения деталей и отправки по всей России.",
   },
 ];
 
@@ -151,7 +149,11 @@ export default async function HomePage() {
         addressLocality: "Санкт-Петербург",
         addressCountry: "RU",
       },
-      sameAs: ["https://vk.com/club237611844"],
+      sameAs: [
+        "https://vk.com/club237611844",
+        "https://vk.com/elenagur30",
+        "https://t.me/gurevichlena",
+      ],
     },
     {
       "@context": "https://schema.org",
@@ -202,107 +204,83 @@ export default async function HomePage() {
 
   return (
     <>
-      {jsonLd.map((schema, i) => (
+      {jsonLd.map((schema) => (
         <script
-          key={i}
+          key={(schema as { "@type": string })["@type"]}
           type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <AnnouncementBadge />
-
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-sky-50/50 to-white py-16 sm:py-24">
-        {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-sky-100/40 blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-emerald-100/30 blur-3xl" />
         </div>
-        <div className="container mx-auto px-4 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <FadeIn delay={0.1}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-slate-900 mb-6 leading-tight">
-                  Кубики-Самоучки — настольные игры{" "}
-                  <span className="bg-gradient-to-r from-sky-600 to-cyan-500 bg-clip-text text-transparent">
-                    для изучения русского языка
-                  </span>
-                </h1>
-              </FadeIn>
-              <FadeIn delay={0.25}>
-                <p className="text-lg text-slate-700 mb-4">
-                  Развивающие настольные игры с кубиками, которые помогают детям
-                  7–12 лет освоить правила русского языка в увлекательной форме.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.35}>
-                <p className="text-base text-slate-600 mb-8">
-                  Разработаны логопедом-дефектологом для индивидуальных и
-                  групповых занятий — дома, в школе или на приеме у специалиста.
-                  Тренируем части речи, падежи, безударные гласные, слоги и
-                  структуру предложений.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.45}>
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    href="/games/"
-                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+        <div className="w-full px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-3xl mx-auto text-center">
+            <FadeIn delay={0.1}>
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-slate-900 mb-6 leading-tight">
+                Кубики-Самоучки — настольные игры{" "}
+                <span className="bg-gradient-to-r from-sky-600 to-cyan-500 bg-clip-text text-transparent">
+                  для изучения русского языка
+                </span>
+              </h1>
+            </FadeIn>
+            <FadeIn delay={0.25}>
+              <p className="text-lg text-slate-700 mb-4">
+                Развивающие настольные игры с кубиками, которые помогают детям
+                7–12 лет освоить правила русского языка в увлекательной форме.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.35}>
+              <p className="text-base text-slate-600 mb-8">
+                Разработаны логопедом-дефектологом для индивидуальных и
+                групповых занятий — дома, в школе или на приеме у специалиста.
+                Тренируем части речи, падежи, безударные гласные, слоги и
+                структуру предложений.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.45}>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Link
+                  href="/games/"
+                  className="inline-flex items-center px-7 py-3.5 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                >
+                  Выбрать игру
+                  <svg
+                    className="w-4 h-4 ms-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
-                    Выбрать игру
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/#features"
-                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-white/80 backdrop-blur text-sky-600 font-semibold border border-sky-200/60 hover:bg-sky-50 hover:border-sky-300 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
-                  >
-                    Узнать больше
-                  </Link>
-                </div>
-              </FadeIn>
-            </div>
-            <FadeIn direction="right" delay={0.3}>
-              <Floating amplitude={6} duration={4}>
-                <div className="relative">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-sky-200/50 ring-1 ring-black/5">
-                    <Image
-                      src="/images/happy-learning.jpg"
-                      alt="Ребенок увлеченно играет в образовательную настольную игру с кубиками"
-                      fill
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
                     />
-                  </div>
-                  {/* Decorative badge */}
-                  <div className="absolute -bottom-4 -left-4 bg-white rounded-xl px-4 py-2 shadow-lg ring-1 ring-black/5">
-                    <span className="text-2xl mr-1.5">🎲</span>
-                    <span className="font-semibold text-slate-900">7 игр</span>
-                  </div>
-                </div>
-              </Floating>
+                  </svg>
+                </Link>
+                <Link
+                  href="/#features"
+                  className="inline-flex items-center px-7 py-3.5 rounded-xl bg-white/80 backdrop-blur text-sky-600 font-semibold border border-sky-200/60 hover:bg-sky-50 hover:border-sky-300 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                >
+                  Узнать больше
+                </Link>
+              </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
       {/* Video section */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="below-fold-section py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-4 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-4 text-center">
               Как играть в Кубики-Самоучки — видео с занятий
             </h2>
           </FadeIn>
@@ -332,11 +310,11 @@ export default async function HomePage() {
       {/* Features */}
       <section
         id="features"
-        className="py-16 sm:py-24 bg-slate-50 scroll-mt-20"
+        className="below-fold-section py-16 sm:py-24 bg-slate-50 scroll-mt-20"
       >
         <div className="container mx-auto px-4">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-12 text-center">
               Почему выбирают игры с кубиками для русского языка
             </h2>
           </FadeIn>
@@ -366,7 +344,7 @@ export default async function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-14 bg-gradient-to-r from-sky-600 to-cyan-600 relative overflow-hidden">
+      <section className="below-fold-section py-14 bg-gradient-to-r from-sky-600 to-cyan-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIvPjwvc3ZnPg==')] opacity-50" />
         <div className="container mx-auto px-4 relative">
           <Stagger
@@ -389,10 +367,10 @@ export default async function HomePage() {
       </section>
 
       {/* Product Details */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="below-fold-section py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-4 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-4 text-center">
               Что входит в набор игр Кубики-Самоучки
             </h2>
           </FadeIn>
@@ -449,6 +427,7 @@ export default async function HomePage() {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -464,11 +443,11 @@ export default async function HomePage() {
       </section>
 
       {/* Credibility / Testimonial */}
-      <section className="py-16 sm:py-24 bg-slate-50">
+      <section className="below-fold-section py-16 sm:py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <FadeIn>
-              <h2 className="text-3xl font-bold text-slate-900 mb-10">
+              <h2 className="font-display text-3xl font-bold text-slate-900 mb-10">
                 Кому подходят игры с кубиками
               </h2>
             </FadeIn>
@@ -528,30 +507,21 @@ export default async function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="below-fold-section py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-10 text-center">
               Вопросы и ответы об играх с кубиками
             </h2>
           </FadeIn>
-          <Stagger className="space-y-4" staggerDelay={0.08}>
-            {faqItems.map((item, i) => (
-              <StaggerItem key={i}>
-                <div className="group p-6 rounded-2xl bg-slate-50 hover:bg-sky-50/50 border border-transparent hover:border-sky-100 transition-all duration-300">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-start gap-3">
-                    <span className="shrink-0 w-7 h-7 rounded-lg bg-sky-100 text-sky-600 text-sm font-bold flex items-center justify-center mt-0.5">
-                      {i + 1}
-                    </span>
-                    {item.q}
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed pl-10">
-                    {item.a}
-                  </p>
-                </div>
-              </StaggerItem>
+          <div className="space-y-3">
+            {faqItems.map((item) => (
+              <details key={item.q} className="faq-details">
+                <summary>{item.q}</summary>
+                <p className="faq-answer">{item.a}</p>
+              </details>
             ))}
-          </Stagger>
+          </div>
         </div>
       </section>
 
@@ -559,15 +529,18 @@ export default async function HomePage() {
       <NewsFeed posts={posts} />
 
       {/* Contact */}
-      <section id="contact" className="py-16 sm:py-24 bg-slate-50 scroll-mt-20">
+      <section
+        id="contact"
+        className="below-fold-section py-16 sm:py-24 bg-slate-50 scroll-mt-20"
+      >
         <div className="container mx-auto px-4">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-12 text-center">
               Свяжитесь с нами
             </h2>
           </FadeIn>
           <Stagger
-            className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12"
+            className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
             staggerDelay={0.1}
           >
             <StaggerItem>
@@ -593,6 +566,64 @@ export default async function HomePage() {
             <StaggerItem>
               <HoverCard className="h-full">
                 <a
+                  href="https://t.me/gurevichlena"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-5 rounded-2xl bg-white shadow-md ring-1 ring-black/[0.03] hover:shadow-lg transition-shadow duration-300 h-full"
+                >
+                  <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-sky-100 text-sky-600">
+                    <svg
+                      className="w-6 h-6"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="text-xs text-slate-400 font-medium uppercase tracking-wider">
+                      Telegram
+                    </div>
+                    <div className="font-semibold text-slate-900">
+                      @gurevichlena
+                    </div>
+                  </div>
+                </a>
+              </HoverCard>
+            </StaggerItem>
+            <StaggerItem>
+              <HoverCard className="h-full">
+                <a
+                  href="https://vk.com/elenagur30"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-5 rounded-2xl bg-white shadow-md ring-1 ring-black/[0.03] hover:shadow-lg transition-shadow duration-300 h-full"
+                >
+                  <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 text-blue-600">
+                    <svg
+                      className="w-6 h-6"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.72-1.033-1.01-1.49-1.135-1.745-1.135-.356 0-.458.102-.458.597v1.575c0 .424-.135.683-1.253.683-1.846 0-3.896-1.12-5.339-3.202-2.17-3.041-2.763-5.32-2.763-5.785 0-.255.102-.491.596-.491h1.744c.44 0 .61.237.779.797.846 2.424 2.257 4.542 2.837 4.542.22 0 .322-.102.322-.66v-2.56c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.408.44-.408h2.747c.373 0 .508.186.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.27-1.423 2.18-3.624 2.18-3.624.119-.237.305-.457.745-.457h1.744c.525 0 .644.27.525.643-.22 1.017-2.375 4.081-2.375 4.081-.186.305-.254.457 0 .813.186.271.796.813 1.202 1.304.745.915 1.32 1.685 1.473 2.206.17.542-.101.813-.626.813z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="text-xs text-slate-400 font-medium uppercase tracking-wider">
+                      ВКонтакте
+                    </div>
+                    <div className="font-semibold text-slate-900">
+                      Елена Гуревич
+                    </div>
+                  </div>
+                </a>
+              </HoverCard>
+            </StaggerItem>
+            <StaggerItem>
+              <HoverCard className="h-full">
+                <a
                   href="https://vk.com/club237611844"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -603,7 +634,7 @@ export default async function HomePage() {
                   </span>
                   <div>
                     <div className="text-xs text-slate-400 font-medium uppercase tracking-wider">
-                      ВКонтакте
+                      Сообщество
                     </div>
                     <div className="font-semibold text-slate-900">Кубичи</div>
                   </div>
@@ -644,28 +675,51 @@ export default async function HomePage() {
       {/* Order */}
       <section
         id="order"
-        className="py-16 sm:py-24 bg-gradient-to-b from-sky-50 to-sky-100/50 scroll-mt-20"
+        className="below-fold-section py-16 sm:py-24 bg-gradient-to-b from-sky-50 to-sky-100/50 scroll-mt-20"
       >
         <div className="container mx-auto px-4">
           <FadeIn>
-            <h2 className="text-3xl font-bold text-slate-900 mb-4 text-center">
+            <h2 className="font-display text-3xl font-bold text-slate-900 mb-4 text-center">
               Заказать кубики
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
             <p className="text-lg text-slate-600 text-center mb-8 max-w-xl mx-auto">
-              Заполните форму, и мы свяжемся с вами для оформления заказа
+              Заполните форму, напишите в мессенджер или закажите через магазин
+              ВКонтакте
             </p>
           </FadeIn>
+          <FadeIn delay={0.15}>
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <a
+                href="https://vk.com/market-237611844"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors min-h-[44px]"
+              >
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.72-1.033-1.01-1.49-1.135-1.745-1.135-.356 0-.458.102-.458.597v1.575c0 .424-.135.683-1.253.683-1.846 0-3.896-1.12-5.339-3.202-2.17-3.041-2.763-5.32-2.763-5.785 0-.255.102-.491.596-.491h1.744c.44 0 .61.237.779.797.846 2.424 2.257 4.542 2.837 4.542.22 0 .322-.102.322-.66v-2.56c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.408.44-.408h2.747c.373 0 .508.186.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.27-1.423 2.18-3.624 2.18-3.624.119-.237.305-.457.745-.457h1.744c.525 0 .644.27.525.643-.22 1.017-2.375 4.081-2.375 4.081-.186.305-.254.457 0 .813.186.271.796.813 1.202 1.304.745.915 1.32 1.685 1.473 2.206.17.542-.101.813-.626.813z" />
+                </svg>
+                Магазин ВКонтакте
+              </a>
+              <a
+                href="https://vk.com/market/product/kubiki-samouchki-237611844-16703645"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold border border-blue-200 hover:bg-blue-50 transition-colors min-h-[44px]"
+              >
+                Кубики-Самоучки в VK Market
+              </a>
+            </div>
+          </FadeIn>
           <ScaleIn delay={0.2}>
-            <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white">
-              <iframe
-                src="https://forms.yandex.ru/cloud/686581c502848f7370546c98/"
-                className="w-full border-0"
-                height="500"
-                title="Форма заказа Кубики-Самоучки"
-                loading="lazy"
-              />
+            <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white p-1">
+              <YandexOrderForm />
             </div>
           </ScaleIn>
         </div>
