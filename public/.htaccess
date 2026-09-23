@@ -1,0 +1,25 @@
+# Apache (reg.ru ISPmanager) — static Next.js export
+Options -Indexes
+DirectoryIndex index.html
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prefer apex over www (optional; keep if alias www is set)
+RewriteCond %{HTTP_HOST} ^www\.cubichi\.ru$ [NC]
+RewriteRule ^ https://cubichi.ru%{REQUEST_URI} [L,R=301]
+
+# Serve trailing-slash directories / fall back to 404.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /404.html [L]
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

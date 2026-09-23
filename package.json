@@ -17,7 +17,8 @@
     "check:qlty": "qlty check -a",
     "admin": "npx tsx --tsconfig tsconfig.admin.json admin/server.ts",
     "generate-rss": "npx tsx --tsconfig tsconfig.admin.json scripts/generate-rss.ts",
-    "export-posts": "tsx scripts/export-posts.ts"
+    "export-posts": "tsx scripts/export-posts.ts",
+    "deploy:regru": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/deploy-regru.ps1"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

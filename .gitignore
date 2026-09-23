@@ -34,3 +34,5 @@ memory-bank/
 /node_modules
 /.playwright-mcp
 /.netlify
+cubichi-out.zip
+.env.local

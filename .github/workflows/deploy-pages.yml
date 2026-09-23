@@ -1,8 +1,7 @@
 name: Deploy to GitHub Pages
 
+# Optional mirror only — production is reg.ru (see docs/REG_RU_HOSTING.md)
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -34,9 +33,6 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://cubichi.ru
-
-      - name: Add CNAME for custom domain
-        run: echo "cubichi.ru" > out/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
