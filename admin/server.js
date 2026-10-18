@@ -412,6 +412,9 @@ const dashboardComponent = componentLoader.add(
   "Dashboard",
   resolve(process.cwd(), "admin", "dashboard.jsx"),
 );
+if (process.env.NODE_ENV === "production") {
+  process.env.ADMIN_JS_SKIP_BUNDLE = "true";
+}
 // ─── AdminJS Instance ─────────────────────────────────────────────────────────
 const adminJs = new AdminJS({
   resources: [
@@ -696,7 +699,7 @@ const router = AdminJSExpress.buildAuthenticatedRouter(
   },
 );
 app.get("/admin/frontend/assets/components.bundle.js", (_req, res, next) => {
-  res.sendFile(resolve(process.cwd(), ".adminjs", "bundle.js"), (error) => {
+  res.sendFile(resolve(process.cwd(), "admin", "assets", "components.bundle.js"), (error) => {
     if (error) next(error);
   });
 });
