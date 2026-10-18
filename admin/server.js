@@ -695,6 +695,11 @@ const router = AdminJSExpress.buildAuthenticatedRouter(
     secret: ADMIN_COOKIE_SECRET,
   },
 );
+app.get("/admin/frontend/assets/components.bundle.js", (_req, res, next) => {
+  res.sendFile(resolve(process.cwd(), ".adminjs", "bundle.js"), (error) => {
+    if (error) next(error);
+  });
+});
 app.use(adminJs.options.rootPath, router);
 mountPublicApi(app);
 // Health check
