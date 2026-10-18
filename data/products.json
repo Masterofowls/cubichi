@@ -1,0 +1,46 @@
+[
+  {
+    "id": "product-parts-of-speech",
+    "title": "Части речи и члены предложения",
+    "slug": "parts-of-speech",
+    "description": "2 кубика + 4 ламинированных карточки. Ребенок бросает кубик и находит на карточке слово нужной части речи или члена предложения.",
+    "age": "3–6 класс",
+    "price": "",
+    "image": "",
+    "gradient": "from-emerald-500 to-teal-500",
+    "published": true
+  },
+  {
+    "id": "product-cases",
+    "title": "Падежи и склонения",
+    "slug": "cases",
+    "description": "2 кубика + 12 карточек с картинками + 24 карточки со словами. Три варианта игры для отработки всех 6 падежей русского языка.",
+    "age": "2–5 класс",
+    "price": "",
+    "image": "",
+    "gradient": "from-orange-500 to-amber-500",
+    "published": true
+  },
+  {
+    "id": "product-root-vowels",
+    "title": "Безударные гласные в корне",
+    "slug": "root-vowels",
+    "description": "2 кубика + 8 карточек. Тренируем проверку безударных гласных А, О, И, Е, Я в корне слова через подбор проверочных слов.",
+    "age": "2–4 класс",
+    "price": "",
+    "image": "",
+    "gradient": "from-violet-500 to-purple-500",
+    "published": true
+  },
+  {
+    "id": "cards-listen-select",
+    "title": "Слушай и выбирай — карточки-самоучки",
+    "slug": "cards-listen-select",
+    "description": "Игровой набор для слухового внимания и памяти: слушайте стихотворение, выбирайте подходящие картинки и проверяйте себя по тексту.",
+    "age": "5–10 лет",
+    "price": "",
+    "image": "/images/cards-self-study/card-deck-box.webp",
+    "href": "/cards/",
+    "published": true
+  }
+]

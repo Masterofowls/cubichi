@@ -5,16 +5,18 @@
 @layer base {
   :root {
     color-scheme: light;
-    accent-color: #0284c7;
+    accent-color: #a75037;
 
-    --color-brand: #0284c7;
-    --color-brand-muted: #e0f2fe;
-    --color-surface: #ffffff;
-    --color-surface-muted: #f8fafc;
-    --color-text: #0f172a;
-    --color-text-muted: #475569;
-    --radius-lg: 1rem;
-    --radius-xl: 1.25rem;
+    --color-brand: #a75037;
+    --color-brand-muted: #f4e8dd;
+    --color-surface: #fffdf8;
+    --color-surface-muted: #f6f1e8;
+    --color-text: #28231f;
+    --color-text-muted: #71685f;
+    --radius-lg: 1.125rem;
+    --radius-xl: 1.5rem;
+    --font-display: "Trebuchet MS", "Segoe UI", sans-serif;
+    --font-body: "Segoe UI", system-ui, sans-serif;
   }
 
   html {
@@ -26,7 +28,15 @@
 
   body {
     color: var(--color-text);
-    background-color: var(--color-surface);
+    background: var(--color-surface);
+    font-family: var(--font-body);
+    line-height: 1.65;
+  }
+
+  #root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
   h1,
@@ -34,6 +44,7 @@
   h3 {
     font-family: var(--font-display), system-ui, sans-serif;
     text-wrap: balance;
+    letter-spacing: -0.025em;
   }
 
   p,
@@ -80,7 +91,7 @@
     font-weight: 600;
     font-size: 0.875rem;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgb(2 132 199 / 35%);
+    box-shadow: 0 4px 14px rgb(167 80 55 / 28%);
   }
 
   .skip-link:focus-visible {
@@ -98,12 +109,14 @@
     border-radius: var(--radius-xl);
     background: var(--color-surface-muted);
     border: 1px solid transparent;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .faq-details[open] {
-    background: rgb(240 249 255 / 50%);
-    border-color: #e0f2fe;
+    background: rgb(244 232 221 / 70%);
+    border-color: #ead4c6;
   }
 
   .faq-details summary {
@@ -123,8 +136,34 @@
     float: inline-end;
     font-size: 1.25rem;
     line-height: 1;
-    color: var(--color-brand);
+    color: #a75037;
     transition: transform 0.2s ease;
+  }
+
+  .order-input {
+    display: block;
+    width: 100%;
+    min-height: 3rem;
+    border: 1px solid #ddd5c9;
+    border-radius: 0.75rem;
+    background: #fffdf8;
+    padding: 0.75rem 0.9rem;
+    color: #28231f;
+    font: inherit;
+    font-weight: 400;
+    transition:
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .order-input::placeholder {
+    color: #929b92;
+  }
+
+  .order-input:focus {
+    border-color: #a75037;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(167 80 55 / 14%);
   }
 
   .faq-details[open] summary::after {
@@ -165,8 +204,8 @@
 }
 
 ::selection {
-  background: #bae6fd;
-  color: #0c4a6e;
+  background: #ead4a6;
+  color: #3b241f;
 }
 
 :focus-visible {
@@ -213,12 +252,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(255 255 255 / 65%) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 65%) 50%, transparent 100%);
   animation: shimmer 1.6s ease-in-out infinite;
 }
 

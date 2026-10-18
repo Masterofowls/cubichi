@@ -1,4 +1,4 @@
-# Apache (reg.ru ISPmanager) — static Next.js export
+# Apache (reg.ru ISPmanager) — static Vite/React application
 Options -Indexes
 DirectoryIndex index.html
 
@@ -11,12 +11,12 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.cubichi\.ru$ [NC]
 RewriteRule ^ https://cubichi.ru%{REQUEST_URI} [L,R=301]
 
-# Serve trailing-slash directories / fall back to 404.html
+# Serve static files directly; let React Router handle application routes.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /404.html [L]
+RewriteRule ^ /index.html [L]
 
-ErrorDocument 404 /404.html
+ErrorDocument 404 /index.html
 
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"

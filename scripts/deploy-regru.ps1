@@ -1,4 +1,4 @@
-# Deploy Next.js static export (out/) to reg.ru ISPmanager via FTP.
+# Deploy the Vite static build (out/) to reg.ru ISPmanager via FTP.
 # Requires: .env.local with FTP_HOST, FTP_USER, FTP_PASS, FTP_REMOTE_DIR
 
 $ErrorActionPreference = "Stop"

@@ -1,0 +1,8 @@
+{
+  "plugins": ["react"],
+  "rules": {
+    "no-debugger": "error",
+    "no-eval": "error",
+    "no-unused-vars": "warn"
+  }
+}
